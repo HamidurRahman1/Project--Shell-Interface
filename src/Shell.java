@@ -74,7 +74,7 @@ public class Shell
         }
         else if("history".equalsIgnoreCase(command))
         {
-            result = history.getHistory().toString();
+            result = history.getHistory().toString().concat("\n");
             return true;
         }
         else if("env".equalsIgnoreCase(command))
@@ -90,7 +90,7 @@ public class Shell
         else if("!!".equalsIgnoreCase(command))
         {
             if(history.getHistory().size() <= 1)
-                throw new IllegalAccessError("No previous command found");
+                throw new IllegalArgumentException("No previous command found");
             else
             {
                 int i = history.getHistory().size()-2;
@@ -152,6 +152,11 @@ public class Shell
             return true;
         }
         else if("whoami".equalsIgnoreCase(command))
+        {
+            result = process(command);
+            return true;
+        }
+        else if("pbpaste".equalsIgnoreCase(command))
         {
             result = process(command);
             return true;
@@ -258,6 +263,7 @@ public class Shell
     public static List<String> Commands()
     {
         return Arrays.asList("!!", "cal", "cat [file]", "cd", "cd ..", "cd [dir]", "date", "env",
-            "exit", "history", "logname", "ls", "mkdir [dir]", "os", "pwd", "touch [file]", "users", "who", "whoami");
+            "exit", "history", "logname", "ls", "mkdir [dir]", "os", "pwd", "pbpaste",
+                "touch [file]", "users", "who", "whoami");
     }
 }

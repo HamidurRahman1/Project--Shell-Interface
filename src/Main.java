@@ -11,6 +11,7 @@ public class Main
             Scanner sc = new Scanner(System.in);
             
             System.out.println(Shell.Commands());
+            System.out.println();
             while(true)
             {
                 System.out.print(shell.getName());
