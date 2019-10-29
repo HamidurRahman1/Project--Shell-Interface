@@ -1,5 +1,3 @@
-package Shell_Interface;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -59,19 +57,19 @@ public class Shell
         if("pwd".equalsIgnoreCase(command))
         {
             processBuilder.directory(new File(directory));
-            result = directory;
+            result = directory.concat("\n");
             return true;
         }
         else if("cd".equalsIgnoreCase(command))
         {
             directory = System.getProperty("user.home");
             processBuilder.directory(new File(directory));
-            result = processBuilder.directory().toString();
+            result = processBuilder.directory().toString().concat("\n");
             return true;
         }
         else if("os".equalsIgnoreCase(command))
         {
-            result = System.getProperty("os.name");
+            result = System.getProperty("os.name").concat("\n");
             return true;
         }
         else if("history".equalsIgnoreCase(command))
@@ -130,7 +128,7 @@ public class Shell
               .append(" ").append(d.getDayOfMonth()).append(" ").append(d.getHour())
               .append(":").append(d.getMinute()).append(":").append(d.getSecond())
               .append(" ").append(d.getYear());
-            result = sb.toString();
+            result = sb.toString().concat("\n");
             return true;
         }
         else if("cal".equalsIgnoreCase(command))
@@ -174,17 +172,21 @@ public class Shell
                 if(file.isDirectory())
                 {
                     processBuilder.directory(file);
-                    result = directory;
+                    result = directory.concat("\n");
                     return true;
                 }
             }
-            file = new File(args[1]);
-            if(file.isDirectory())
+            else
             {
-                directory = file.getAbsolutePath();
-                processBuilder.directory(new File(directory));
-                result = directory;
-                return true;
+                file = new File(args[1]);
+                if(file.isDirectory())
+                {
+                    directory = file.getAbsolutePath();
+                    System.out.println(directory);
+                    processBuilder.directory(new File(directory));
+                    result = directory.concat("\n");
+                    return true;
+                }
             }
         }
         else if(args[0].equalsIgnoreCase("mkdir"))

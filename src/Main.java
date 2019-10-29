@@ -1,5 +1,3 @@
-package Shell_Interface;
-
 import java.util.Scanner;
 
 public class Main
@@ -8,7 +6,7 @@ public class Main
     {
         try
         {
-            final Shell shell = new Shell("hr-Shell_Interface>");
+            final Shell shell = new Shell("java-shell>");
             String command;
             Scanner sc = new Scanner(System.in);
             
@@ -17,7 +15,7 @@ public class Main
             {
                 System.out.print(shell.getName());
                 command = sc.nextLine();
-                System.out.println(shell.executeCommand(command));
+                System.out.print(shell.executeCommand(command));
             }
         }
         catch(Exception ex)
